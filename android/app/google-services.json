@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1056418564212",
+    "firebase_url": "https://anytix-app.firebaseio.com",
+    "project_id": "anytix-app",
+    "storage_bucket": "anytix-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056418564212:android:b71f31320da00fea13e921",
+        "android_client_info": {
+          "package_name": "com.lessthanthree.anytixapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056418564212-ol03n5vm8k01thpbe0pjecd59mo9b8fs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAKqOZUqW7PsGHP2qmviWZHNHylZcWBx4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056418564212-ol03n5vm8k01thpbe0pjecd59mo9b8fs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
