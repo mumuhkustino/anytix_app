@@ -1,55 +1,49 @@
 part of 'services.dart';
 
 class AuthServices {
+  static fa.FirebaseAuth _firebaseAuth = fa.FirebaseAuth.instance;
 
-  static FirebaseAuth _auth = FirebaseAuth.instance;
-
-  static Future<SignInSignUpResult> signUp(
-      String email,
-      String password,
-      String name,
-      List<String> selectedGenres,
-      String selectedLanguage) async {
+  static Future<SignInSignUpResponse> signUp(String email, String password,
+      String name, List<String> selectedGenres, String selectedLanguage) async {
     try {
-      AuthResult authResult = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      fa.UserCredential userCredential = await _firebaseAuth
+          .createUserWithEmailAndPassword(email: email, password: password);
 
-      User user = authResult.user.convertToUserModel(
-        name: name,
-        selectedGenres: selectedGenres,
-        selectedLanguage: selectedLanguage
-      );
+      User user = userCredential.user.convertToUser(
+          name: name,
+          selectedGenres: selectedGenres,
+          selectedLanguage: selectedLanguage);
 
       await UserServices.updateUser(user);
 
-      return SignInSignUpResult(user: user);
+      return SignInSignUpResponse(user: user);
     } catch (e) {
-      return SignInSignUpResult(message: e.toString().split(',')[1]);
+      return SignInSignUpResponse(message: e.toString().split(',').elementAt(0));
     }
   }
 
-  static Future<SignInSignUpResult> signIn(String email, String password) async {
+  static Future<SignInSignUpResponse> signIn(
+      String email, String password) async {
     try {
-      AuthResult authResult = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      fa.UserCredential userCredential = await _firebaseAuth
+          .signInWithEmailAndPassword(email: email, password: password);
 
-      User user = await authResult.user.fromFireStore();
+      User user = await userCredential.user.fromFireStore();
 
-      return SignInSignUpResult(user: user);
+      return SignInSignUpResponse(user: user);
     } catch (e) {
-      return SignInSignUpResult(message: e.toString().split(',')[1]);
+      return SignInSignUpResponse(message: e.toString().split(',').elementAt(0));
     }
   }
 
   static Future<void> signOut() async {
-    await _auth.signOut();
+    await _firebaseAuth.signOut();
   }
-
 }
 
-class SignInSignUpResult {
-
+class SignInSignUpResponse {
   final User user;
   final String message;
 
-  SignInSignUpResult({this.user, this.message});
-
+  SignInSignUpResponse({this.user, this.message});
 }

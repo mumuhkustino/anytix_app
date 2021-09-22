@@ -1,17 +1,11 @@
 part of 'services.dart';
 
 class UserServices {
-
-  static CollectionReference _userCollection = Firestore.instance.collection('users');
+  static CollectionReference _collectionReference =
+      FirebaseFirestore.instance.collection('users');
 
   static Future<void> updateUser(User user) async {
-    String genres = "";
-
-    for (var genre in user.selectedGenres) {
-      genres += genre + ((genre != user.selectedGenres.last) ? ',' : '');
-    }
-
-    _userCollection.document(user.id).setData({
+    _collectionReference.doc(user.id).set({
       'email': user.email,
       'name': user.name,
       'balance': user.balance,
@@ -22,14 +16,16 @@ class UserServices {
   }
 
   static Future<User> getUser(String id) async {
-    DocumentSnapshot snapshot = await _userCollection.document(id).get();
+    DocumentSnapshot documentSnapshot = await _collectionReference.doc(id).get();
 
-    return User(id, snapshot.data['email'],
-    balance: snapshot.data['balance'],
-    profilePicture: snapshot.data['profilePicture'],
-    selectedGenres: (snapshot.data['selectedGenres'] as List).map((e) => e.toString()).toList(),
-    selectedLanguage: snapshot.data['selectedLanguage'],
-    name: snapshot.data['name']);
+    return User(id, documentSnapshot.get('email'),
+    balance: documentSnapshot.get('balance'),
+      profilePicture: documentSnapshot.get('profilePicture'),
+      selectedGenres: (documentSnapshot.get('selectedGenres') as List)
+        .map((e) => e.toString())
+        .toList(),
+      selectedLanguage: documentSnapshot.get('selectedLanguage'),
+      name: documentSnapshot.get('name')
+    );
   }
-
 }

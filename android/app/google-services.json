@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "1056418564212",
-    "firebase_url": "https://anytix-app.firebaseio.com",
-    "project_id": "anytix-app",
-    "storage_bucket": "anytix-app.appspot.com"
+    "project_number": "240311651038",
+    "project_id": "anytix-app-f2654",
+    "storage_bucket": "anytix-app-f2654.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1056418564212:android:b71f31320da00fea13e921",
+        "mobilesdk_app_id": "1:240311651038:android:7f953be3ef43ae5fe7904f",
         "android_client_info": {
           "package_name": "com.lessthanthree.anytixapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1056418564212-ol03n5vm8k01thpbe0pjecd59mo9b8fs.apps.googleusercontent.com",
+          "client_id": "240311651038-q0qkqlkdi024kpckotlojdc70hpu1h1n.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAAKqOZUqW7PsGHP2qmviWZHNHylZcWBx4"
+          "current_key": "AIzaSyAh-wQ5fhhV70WULAxRI7hAbH58Y8Pdp3Q"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1056418564212-ol03n5vm8k01thpbe0pjecd59mo9b8fs.apps.googleusercontent.com",
+              "client_id": "240311651038-q0qkqlkdi024kpckotlojdc70hpu1h1n.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

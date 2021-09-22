@@ -1,9 +1,16 @@
 import 'package:anytixapp/services/services.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,41 +19,40 @@ class MyApp extends StatelessWidget {
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              RaisedButton(
-                child: Text("Sign Up"),
-                onPressed: () async {
-                  SignInSignUpResult result = await AuthServices.signUp(
-                      "anytix@admin.com",
-                      "141414",
-                      "Anytix",
-                      ["Action", "Music", "Drama", "Romance"],
-                      "English");
-                  if (result.user == null) {
-                    print(result.message);
-                  } else {
-                    print(result.user.toString());
-                  }
-                },
-              ),
-              RaisedButton(
-                child: Text("Sign In"),
-                onPressed: () async {
-                  SignInSignUpResult result =
-                      await AuthServices.signIn("anytix@admin.com", "141414");
-                  if (result.user == null) {
-                    print(result.message);
-                  } else {
-                    print(result.user.toString());
-                  }
-                },
-              ),
-              RaisedButton(
-                child: Text("Sign Out"),
-                onPressed: () async {
-                  AuthServices.signOut();
-                },
-              )
+            children: [
+              ElevatedButton(
+                  child: Text("Sign Up"),
+                  onPressed: () async {
+                    SignInSignUpResponse response = await AuthServices.signUp(
+                        "anytix@admin.com",
+                        "123321",
+                        "Anytix",
+                        ["Action", "Horror", "Music", "Drama"],
+                        "Indonesian");
+
+                    if (response.user == null) {
+                      print(response.message);
+                    } else {
+                      print(response.user.toString());
+                    }
+                  }),
+              ElevatedButton(
+                  onPressed: () async {
+                    SignInSignUpResponse response = await AuthServices.signIn(
+                        "anytix@admin.com", "123321");
+
+                    if (response.user == null) {
+                      print(response.message);
+                    } else {
+                      print(response.user.toString());
+                    }
+                  },
+                  child: Text("Sign In")),
+              ElevatedButton(
+                  onPressed: () async {
+                    await AuthServices.signOut();
+                  },
+                  child: Text("Sign Out"))
             ],
           ),
         ),
